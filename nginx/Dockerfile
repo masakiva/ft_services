@@ -4,8 +4,8 @@ RUN apk update
 RUN apk add nginx=1.18.0-r13
 RUN apk add openssl=1.1.1i-r0
 
-COPY simple-nginx.conf .
-COPY simple-index.html .
+COPY nginx.conf .
+COPY index.html .
 COPY init_nginx.sh .
 COPY setup_openssl .
 
