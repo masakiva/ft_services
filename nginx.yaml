@@ -1,39 +1,40 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: nginx-deployment # name of the deployment
-    labels:
-        app: nginx
+  name: nginx-deployment # deployment name
+  labels:
+    app: nginx # deployment label
 spec:
-    selector:
-        matchLabels: # match pod label
-            app: nginx
-    template: # pod definition
-        metadata:
-            labels:
-                app: nginx # pod label
-        spec:
-            containers:
-            - name: nginx-container
-              image: nginx-image:1.0
-              imagePullPolicy: Never
-              ports:
-              - containerPort: 80
-              - containerPort: 443
+  selector:
+    matchLabels:
+      app: nginx # match pod label
+  template: # pod definition
+    metadata:
+      labels:
+        app: nginx # pod label
+    spec:
+      containers:
+      - name: nginx-container
+        image: nginx-image:1.0
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 80
+        - containerPort: 443
 ---
 apiVersion: v1
 kind: Service
 metadata:
-    name: nginx-service
+  name: nginx-service
 spec:
-    selector:
-        app: nginx
-    ports:
-        - name: http
-          protocol: TCP
-          port: 80
-          targetPort: 80
-        - name: https
-          protocol: TCP
-          port: 443
-          targetPort: 443
+  selector:
+    app: nginx # match deployment and pod labels
+  type: LoadBalancer
+  ports:
+  - name: http
+    protocol: TCP
+    port: 80
+    targetPort: 80 # match container port
+  - name: https
+    protocol: TCP
+    port: 443
+    targetPort: 443 # match container port
