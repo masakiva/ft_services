@@ -1,14 +1,6 @@
 sudo usermod -aG docker user42; newgrp docker
-eval $(minikube docker-env)
-
-appliquer un changement sur les yaml:
-kubectl delete -f
-puis re apply
-(avec docker build entre les deux si necessaire)
 
 video a 54:00
-
-pour obtenir l'ip du cluster: kubectl get node -o=wide
 
 discord ft_services!
 
