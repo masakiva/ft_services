@@ -14,6 +14,8 @@ install_kubectl()
 	rm kubectl
 }
 
+docker version > /dev/null
+
 if [[ `minikube &> /dev/null ; echo $?` == '127' ]]
 then
 	echo 'Minikube not found'
@@ -30,9 +32,6 @@ fi
 echo
 echo 'Starting Minikube...'
 minikube start --driver=docker
-echo
-echo 'Enabling MetalLB Minikube addon...'
-minikube addons enable metallb
 
 if [[ `service nginx status | grep -Po '(?<=Active: )[[:lower:]]+'` == 'active' ]]
 then
@@ -49,6 +48,23 @@ then
 	install_kubectl
 fi
 
-eval $(minikube docker-env)
+echo
+echo 'Installing MetalLB load-balancer...'
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/namespace.yaml
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/metallb.yaml
+if [[ `kubectl -n metallb-system get secrets | grep -qP 'memberlist\s+Opaque' ; echo $?` == '1' ]]
+then
+	kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
+fi
 
-#docker build -t nginx-image:1.0 nginx
+eval $(minikube -p minikube docker-env)
+
+MINIKUBE_IP=`kubectl get node -o=custom-columns='DATA:status.addresses[0].address' | sed -n 2p`
+sed -i.backup "s/MINIKUBE_EXTERNAL_IP/$MINIKUBE_IP/g" srcs/metallb-config.yaml
+
+kubectl apply -f srcs/metallb-config.yaml
+
+docker build -t nginx-image:1.0 srcs/nginx
+kubectl apply -f srcs/nginx.yaml
+
+mv -f srcs/{metallb-config.yaml.backup,metallb-config.yaml}
