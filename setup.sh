@@ -15,8 +15,7 @@ install_kubectl()
 }
 
 docker version > /dev/null
-
-if [[ `minikube &> /dev/null ; echo $?` == '127' ]]
+if ! command -v minikube &> /dev/null
 then
 	echo 'Minikube not found'
 	echo 'Installing Minikube...'
@@ -33,7 +32,7 @@ echo
 echo 'Starting Minikube...'
 minikube start --driver=docker
 
-if [[ `service nginx status | grep -Po '(?<=Active: )[[:lower:]]+'` == 'active' ]]
+if command -v service && [[ `service nginx status | grep -Po '(?<=Active: )[[:lower:]]+'` == 'active' ]]
 then
 	echo
 	echo 'Stopping currently running nginx server...'
