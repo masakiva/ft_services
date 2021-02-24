@@ -14,7 +14,10 @@ install_kubectl()
 	rm kubectl
 }
 
+### WAKE UP DOCKER DAEMON
 docker version > /dev/null
+
+### UPDATE MINIKUBE
 if ! command -v minikube &> /dev/null
 then
 	echo 'Minikube not found'
@@ -28,10 +31,12 @@ then
 	install_minikube
 fi
 
+### START MINIKUBE CLUSTER
 echo
 echo 'Starting Minikube...'
 minikube start --driver=docker
 
+### WE'LL NEED TO USE 80 AND 443 PORTS
 if command -v service && [[ `service nginx status | grep -Po '(?<=Active: )[[:lower:]]+'` == 'active' ]]
 then
 	echo
@@ -39,6 +44,7 @@ then
 	sudo service nginx stop
 fi
 
+### KUBECTL VERSION
 if [[ `kubectl version --client --short | grep -Po '(?<=Client Version: v)[\d.]+'` != '1.20.2' ]]
 then
 	echo
@@ -47,8 +53,13 @@ then
 	install_kubectl
 fi
 
+### METALLB ADDON
 echo
 echo 'Installing MetalLB load-balancer...'
+if [[ `minikube addons list | grep metallb | grep -oP '(enabled|disabled)'` == 'enabled' ]]
+then
+	minikube addons disable metallb
+fi
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/namespace.yaml
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/metallb.yaml
 if [[ `kubectl -n metallb-system get secrets | grep -qP 'memberlist\s+Opaque' ; echo $?` == '1' ]]
@@ -56,8 +67,10 @@ then
 	kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
 fi
 
+### SWITCH DOCKER ENVIRONMENT TO MINIKUBE'S
 eval $(minikube -p minikube docker-env)
 
+### GET EXTERNAL IP GIVEN BY MINIKUBE
 MINIKUBE_IP=`kubectl get node -o=custom-columns='DATA:status.addresses[0].address' | sed -n 2p`
 sed -i.backup "s/MINIKUBE_EXTERNAL_IP/$MINIKUBE_IP/g" srcs/metallb-config.yaml
 
