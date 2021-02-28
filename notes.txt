@@ -1,9 +1,23 @@
+https://wiki.alpinelinux.org/wiki/MariaDB
+create phpmyadmin dockerfile and display databases
+
+https://wordpress.org/support/article/how-to-install-wordpress/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 sudo usermod -aG docker user42; newgrp docker
 
 video a 54:00
 
 discord ft_services!
-
-todo:
-nginx dockerfile puis yaml puis metallb
-puis pareil avec mysql
