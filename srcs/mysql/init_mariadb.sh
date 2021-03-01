@@ -1,17 +1,12 @@
 #!/bin/sh
 
-mariadb-install-db --user=mysql --datadir=/var/lib/mysql
-#cd '/usr'
-/usr/bin/mariadbd-safe --datadir='/var/lib/mysql' &
-echo
+mariadb-install-db --user='mysql' --datadir='/var/lib/mysql'
+mariadbd-safe --datadir='/var/lib/mysql' &
+sleep 1
 
-sleep 0.1
-echo -n 'Waiting for mariadb to launch'
-while [ `ps | grep mariadbd | wc -l` != 2 ]; do
+until mariadb &
+do
 	echo -n .
 	sleep 0.3
 done
-echo
 mariadb < wordpress_database.sql
-
-sh

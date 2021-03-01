@@ -79,4 +79,10 @@ kubectl apply -f srcs/metallb-config.yaml
 docker build -t nginx-image:1.0 srcs/nginx
 kubectl apply -f srcs/nginx.yaml
 
+docker build -t phpmyadmin-image:1.0 srcs/phpmyadmin
+kubectl apply -f srcs/phpmyadmin.yaml
+
+#docker build -t mysql-image:1.0 srcs/mysql
+#kubectl apply -f srcs/mysql.yaml
+
 mv -f srcs/{metallb-config.yaml.backup,metallb-config.yaml}
