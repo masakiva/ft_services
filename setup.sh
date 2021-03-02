@@ -37,7 +37,7 @@ echo 'Starting Minikube...'
 minikube start --driver=docker
 
 ### WE'LL NEED TO USE 80 AND 443 PORTS
-if command -v service && [[ `service nginx status | grep -Po '(?<=Active: )[[:lower:]]+'` == 'active' ]]
+if command -v service &> /dev/null && [[ `service nginx status | grep -Po '(?<=Active: )[[:lower:]]+'` == 'active' ]]
 then
 	echo
 	echo 'Stopping currently running nginx server...'
@@ -82,7 +82,7 @@ kubectl apply -f srcs/nginx.yaml
 docker build -t phpmyadmin-image:1.0 srcs/phpmyadmin
 kubectl apply -f srcs/phpmyadmin.yaml
 
-#docker build -t mysql-image:1.0 srcs/mysql
-#kubectl apply -f srcs/mysql.yaml
+docker build -t mysql-image:1.0 srcs/mysql
+kubectl apply -f srcs/mysql.yaml
 
 mv -f srcs/{metallb-config.yaml.backup,metallb-config.yaml}
