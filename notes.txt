@@ -1,8 +1,5 @@
-create phpmyadmin dockerfile and display databases
-
 pareil pour wp dans sa config
 wordpress: https://wordpress.org/support/article/how-to-install-wordpress/
-persistent volumes: video ade-garr
 reverse proxy: tout se fait dans la config nginx du container nginx (4 lignes a mettre)
 
 
@@ -17,6 +14,6 @@ reverse proxy: tout se fait dans la config nginx du container nginx (4 lignes a 
 
 sudo usermod -aG docker user42; newgrp docker
 
-video a 54:00
+video a 54:00 https://www.youtube.com/watch?v=X48VuDVv0do
 
 discord ft_services!

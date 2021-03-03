@@ -4,14 +4,14 @@
 # copied from https://wiki.alpinelinux.org/wiki/Nginx
 
 # -D don't assign a password, -g GECOS field
-adduser -D -g 'www' www
+#adduser -D -g 'www' www
 # for html page source
-mkdir /www
-chown -R www:www /var/lib/nginx/
-chown -R www:www /www
+#mkdir /www
+#chown -R www:www /var/lib/nginx/
+#chown -R www:www /www
 
 mv nginx.conf /etc/nginx/
-mv index.html /www/
+#mv index.html /www/
 
 # nginx asks for this file in order to start
 mkdir /run/nginx

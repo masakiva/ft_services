@@ -8,7 +8,7 @@ EXPOSE 80
 EXPOSE 443
 
 COPY nginx.conf .
-COPY index.html .
+#COPY index.html .
 COPY setup_openssl .
 COPY init_nginx.sh .
 

@@ -2,7 +2,7 @@
 
 install_minikube()
 {
-	curl -LO https://github.com/kubernetes/minikube/releases/download/v1.17.1/minikube-linux-amd64
+	curl -LO https://github.com/kubernetes/minikube/releases/download/v1.18.0/minikube-linux-amd64
 	sudo install minikube-linux-amd64 /usr/local/bin/minikube
 	rm minikube-linux-amd64
 }
@@ -23,9 +23,9 @@ then
 	echo 'Minikube not found'
 	echo 'Installing Minikube...'
 	install_minikube
-elif [[ `minikube version | grep -Po '(?<=minikube version: v)[\d.]+'` != '1.17.1' ]]
+elif [[ `minikube version | grep -Po '(?<=minikube version: v)[\d.]+'` != '1.18.0' ]]
 then
-	echo 'Minikube version is not 1.17.1'
+	echo 'Minikube version is not 1.18.0'
 	echo 'Updating Minikube...'
 	minikube delete
 	install_minikube
