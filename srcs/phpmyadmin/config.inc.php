@@ -33,8 +33,6 @@ $cfg['Servers'][$i]['host'] = 'mysql-service';
 $cfg['Servers'][$i]['port'] = 3306;
 $cfg['Servers'][$i]['compress'] = false;
 $cfg['Servers'][$i]['AllowNoPassword'] = false;
-$cfg['Servers'][$i]['user'] = 'wp_user';
-$cfg['Servers'][$i]['password'] = 'wp_pswd';
 
 /**
  * phpMyAdmin configuration storage settings.

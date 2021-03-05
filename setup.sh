@@ -1,15 +1,18 @@
 #!/bin/bash
 
+MINIKUBE_VERSION=1.18.1
+KUBECTL_VERSION=1.20.2
+
 install_minikube()
 {
-	curl -LO https://github.com/kubernetes/minikube/releases/download/v1.18.0/minikube-linux-amd64
+	curl -LO https://github.com/kubernetes/minikube/releases/download/v$MINIKUBE_VERSION/minikube-linux-amd64
 	sudo install minikube-linux-amd64 /usr/local/bin/minikube
 	rm minikube-linux-amd64
 }
 
 install_kubectl()
 {
-	curl -LO https://dl.k8s.io/release/v1.20.2/bin/linux/amd64/kubectl
+	curl -LO https://dl.k8s.io/release/v$KUBECTL_VERSION/bin/linux/amd64/kubectl
 	sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 	rm kubectl
 }
@@ -23,9 +26,9 @@ then
 	echo 'Minikube not found'
 	echo 'Installing Minikube...'
 	install_minikube
-elif [[ `minikube version | grep -Po '(?<=minikube version: v)[\d.]+'` != '1.18.0' ]]
+elif [[ `minikube version | grep -Po '(?<=minikube version: v)[\d.]+'` != "$MINIKUBE_VERSION" ]]
 then
-	echo 'Minikube version is not 1.18.0'
+	echo "Minikube version is not $MINIKUBE_VERSION"
 	echo 'Updating Minikube...'
 	minikube delete
 	install_minikube
@@ -45,10 +48,10 @@ then
 fi
 
 ### KUBECTL VERSION
-if [[ `kubectl version --client --short | grep -Po '(?<=Client Version: v)[\d.]+'` != '1.20.2' ]]
+if [[ `kubectl version --client --short | grep -Po '(?<=Client Version: v)[\d.]+'` != "$KUBECTL_VERSION" ]]
 then
 	echo
-	echo 'kubectl version is not 1.20.2'
+	echo "kubectl version is not $KUBECTL_VERSION"
 	echo 'Updating kubectl...'
 	install_kubectl
 fi
