@@ -1,7 +1,7 @@
 #!/bin/sh
 
-mkdir -p /usr/share/webapps
 mv nginx_wordpress.conf /etc/nginx/nginx.conf
+mv wp-config.php /usr/share/webapps/wordpress/wp-config.php
 
 # nginx asks for this file in order to start
 mkdir /run/nginx
@@ -15,5 +15,4 @@ cat setup_openssl | openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 rm setup_openssl
 
 php-fpm7
-#nginx
-sh
+nginx

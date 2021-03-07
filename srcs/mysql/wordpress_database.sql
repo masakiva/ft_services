@@ -1,4 +1,4 @@
-CREATE USER IF NOT EXISTS 'wp_user'@'localhost' IDENTIFIED BY 'wp_pswd';
+CREATE USER IF NOT EXISTS 'wp_user'@'%' IDENTIFIED BY 'wp_pass';
 CREATE DATABASE IF NOT EXISTS wp_db;
-GRANT ALL PRIVILEGES ON wp_db.* TO 'wp_user'@'localhost';
+GRANT ALL PRIVILEGES ON wp_db.* TO 'wp_user'@'%';
 FLUSH PRIVILEGES;
