@@ -10,5 +10,6 @@ do
 	echo -n .
 	sleep 0.3
 done
+sleep 1
 mariadb < wordpress_database.sql
 tail -f /dev/null

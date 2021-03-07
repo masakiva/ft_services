@@ -13,7 +13,7 @@ https://openclassrooms.com/fr/courses/1733551-gerez-votre-serveur-linux-et-ses-s
 
 
 
-sudo usermod -aG docker user42; newgrp docker
+sudo usermod -aG docker $(whoami); newgrp docker
 
 video a 54:00 https://www.youtube.com/watch?v=X48VuDVv0do
 
