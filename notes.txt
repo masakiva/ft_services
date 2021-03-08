@@ -2,6 +2,7 @@ wordpress:
 https://wordpress.org/support/article/how-to-install-wordpress/
 https://wiki.alpinelinux.org/wiki/WordPress
 
+process principal en foreground dans les containers (avec exec script.sh?)
 
 
 

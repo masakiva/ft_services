@@ -25,3 +25,4 @@ cat setup_openssl | openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 rm setup_openssl
 
 nginx
+tail -f /dev/null
