@@ -46,6 +46,23 @@ spec:
       - name: mysql-container
         image: mysql-image:1.0
         imagePullPolicy: Never
+        livenessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - -c
+            - 'pgrep /usr/bin/mariadbd'
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        startupProbe:
+          exec:
+            command:
+            - /bin/sh
+            - -c
+            - '! pgrep launch_mariadb'
+          initialDelaySeconds: 10
+          failureThreshold: 60
+          periodSeconds: 10
         ports:
         - containerPort: 3306
         volumeMounts:
