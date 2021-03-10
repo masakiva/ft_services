@@ -78,6 +78,7 @@ MINIKUBE_IP=`kubectl get node -o=custom-columns='DATA:status.addresses[0].addres
 sed -i.backup "s/MINIKUBE_EXTERNAL_IP/$MINIKUBE_IP/g" srcs/metallb-config.yaml
 
 kubectl apply -f srcs/metallb-config.yaml
+mv -f srcs/{metallb-config.yaml.backup,metallb-config.yaml}
 
 docker build -t nginx-image:1.0 srcs/nginx
 kubectl apply -f srcs/nginx.yaml
@@ -90,5 +91,3 @@ kubectl apply -f srcs/phpmyadmin.yaml
 
 docker build -t wordpress-image:1.0 srcs/wordpress
 kubectl apply -f srcs/wordpress.yaml
-
-mv -f srcs/{metallb-config.yaml.backup,metallb-config.yaml}

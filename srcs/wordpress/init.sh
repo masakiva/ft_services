@@ -1,6 +1,6 @@
 #!/bin/sh
 
-mv nginx_wordpress.conf /etc/nginx/nginx.conf
+mv nginx.conf /etc/nginx/nginx.conf
 mv wp-config.php /usr/share/webapps/wordpress/wp-config.php
 
 # nginx asks for this file in order to start
