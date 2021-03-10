@@ -7,4 +7,5 @@ then
 	cp -Rp /var/lib/mysql-on-image/* /var/lib/mysql
 fi
 
-mariadbd-safe --datadir='/var/lib/mysql'
+mariadbd-safe --datadir='/var/lib/mysql' &
+tail -f /dev/null
