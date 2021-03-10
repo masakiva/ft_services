@@ -54,15 +54,6 @@ spec:
             - 'pgrep /usr/bin/mariadbd'
           initialDelaySeconds: 5
           periodSeconds: 5
-        startupProbe:
-          exec:
-            command:
-            - /bin/sh
-            - -c
-            - '! pgrep import_wp_table'
-          initialDelaySeconds: 10
-          failureThreshold: 60
-          periodSeconds: 10
         ports:
         - containerPort: 3306
         volumeMounts:

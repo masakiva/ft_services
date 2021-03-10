@@ -1,14 +1,10 @@
 #!/bin/sh
 
-mariadb-install-db --user='mysql' --datadir='/var/lib/mysql'
 sed -i 's/skip-networking/#skip-networking/' /etc/my.cnf.d/mariadb-server.cnf
-mariadbd-safe --datadir='/var/lib/mysql' &
-sleep 1
 
-nohup ./import_wp_tables.sh &
+if [ ! -d /var/lib/mysql/wp_db ]
+then
+	cp -Rp /var/lib/mysql-on-image/* /var/lib/mysql
+fi
 
-#rc-status
-#touch /run/openrc/softlevel
-#rc-service mariadb start
-
-tail -f /dev/null
+mariadbd-safe --datadir='/var/lib/mysql'

@@ -1,3 +1,7 @@
+https://docs.influxdata.com/telegraf/v1.17/administration/configuration/
+https://github.com/influxdata/telegraf/blob/release-1.15/plugins/outputs/influxdb/README.md
+https://github.com/influxdata/telegraf/blob/release-1.15/plugins/inputs/kube_inventory/README.md
+
 process principal en foreground dans les containers (avec exec script.sh?)
 
 
