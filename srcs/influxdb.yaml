@@ -46,32 +46,20 @@ spec:
       - name: influxdb-container
         image: influxdb-image:1.0
         imagePullPolicy: Never
-        #        livenessProbe:
-        #          exec:
-        #            command:
-        #            - /bin/sh
-        #            - -c
-        #            - 'pgrep /usr/bin/mariadbd'
-        #          initialDelaySeconds: 5
-        #          periodSeconds: 5
-        #        startupProbe:
-        #          exec:
-        #            command:
-        #            - /bin/sh
-        #            - -c
-        #            - '! pgrep launch_mariadb'
-        #          initialDelaySeconds: 10
-        #          failureThreshold: 60
-        #          periodSeconds: 10
         ports:
         - containerPort: 8086
         volumeMounts:
         - name: influxdb-persistent-storage
           mountPath: /var/lib/influxdb
+        - name: docker-socket-access
+          mountPath: /var/run/docker.sock
       volumes:
       - name: influxdb-persistent-storage
         persistentVolumeClaim:
           claimName: influxdb-pv-claim
+      - name: docker-socket-access
+        hostPath:
+          path: /var/run/docker.sock
 ---
 apiVersion: v1
 kind: Service

@@ -1,20 +1,22 @@
-mysql: essayer avec openrc?
-
 https://docs.influxdata.com/telegraf/v1.17/administration/configuration/
 https://github.com/influxdata/telegraf/blob/release-1.15/plugins/outputs/influxdb/README.md
 https://github.com/influxdata/telegraf/blob/release-1.15/plugins/inputs/kube_inventory/README.md
 
+ade-garr datasource.yaml
+https://grafana.com/docs/grafana/latest/datasources/influxdb/
+https://grafana.com/docs/grafana/latest/administration/provisioning/#datasources
+
 process principal en foreground dans les containers (avec exec script.sh?)
++ monitor secondary processes, php-fpm, telegraf...
+
+COPY directly in the right place
 
 
 
 
 
-
-
-
-
-
+to add for corrections:
+minikube delete
 sudo usermod -aG docker $(whoami); newgrp docker
 
 video a 54:00 https://www.youtube.com/watch?v=X48VuDVv0do

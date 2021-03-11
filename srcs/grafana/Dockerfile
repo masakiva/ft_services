@@ -5,6 +5,7 @@ RUN apk add grafana=7.3.6-r0
 
 EXPOSE 3000
 
+#COPY grafana.ini .
 COPY init.sh .
 
 CMD ["./init.sh"]

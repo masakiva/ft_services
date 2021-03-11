@@ -7,8 +7,7 @@ RUN apk add openssl=1.1.1j-r0
 EXPOSE 80
 EXPOSE 443
 
-COPY nginx.conf .
-#COPY index.html .
+COPY nginx.conf /etc/nginx
 COPY setup_openssl .
 COPY init.sh .
 

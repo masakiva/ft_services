@@ -10,6 +10,8 @@ RUN mariadbd-safe --datadir='/var/lib/mysql-on-image' & sleep 20 ; \
 							mariadb < user_and_db.sql ; \
 							mariadb < wordpress.sql
 
+RUN apk add openrc=0.42.1-r19
+
 EXPOSE 3306
 
 COPY init.sh .

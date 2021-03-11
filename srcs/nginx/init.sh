@@ -1,17 +1,6 @@
 #!/bin/sh
 
-# the following two paragraphs have been originally
-# copied from https://wiki.alpinelinux.org/wiki/Nginx
-
-# -D don't assign a password, -g GECOS field
-#adduser -D -g 'www' www
-# for html page source
-#mkdir /www
-#chown -R www:www /var/lib/nginx/
-#chown -R www:www /www
-
-mv nginx.conf /etc/nginx/
-#mv index.html /www/
+#mv nginx.conf /etc/nginx/
 
 # nginx asks for this file in order to start
 mkdir /run/nginx
@@ -25,4 +14,3 @@ cat setup_openssl | openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 rm setup_openssl
 
 nginx
-tail -f /dev/null

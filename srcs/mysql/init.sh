@@ -7,5 +7,9 @@ then
 	cp -Rp /var/lib/mysql-on-image/* /var/lib/mysql
 fi
 
-mariadbd-safe --datadir='/var/lib/mysql' &
+rc-status
+touch /run/openrc/softlevel
+rc-service mariadb start
+
+#mariadbd-safe --datadir='/var/lib/mysql' &
 tail -f /dev/null
