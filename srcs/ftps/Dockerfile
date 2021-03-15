@@ -1,14 +1,12 @@
 FROM alpine:3.13
 
 RUN apk update
-RUN apk add nginx=1.18.0-r13
+RUN apk add vsftpd=3.0.3-r6
 RUN apk add openssl=1.1.1j-r0
 
-EXPOSE 80
-EXPOSE 443
+EXPOSE 21 40000 40001 40002 40003 40004
 
-COPY nginx.conf /etc/nginx/
-COPY setup_openssl .
+COPY vsftpd.conf /etc/vsftpd/
 COPY init.sh .
 
 CMD ["./init.sh"]

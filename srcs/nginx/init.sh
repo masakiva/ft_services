@@ -1,7 +1,5 @@
 #!/bin/sh
 
-#mv nginx.conf /etc/nginx/
-
 # nginx asks for this file in order to start
 mkdir /run/nginx
 touch /run/nginx/nginx.pid

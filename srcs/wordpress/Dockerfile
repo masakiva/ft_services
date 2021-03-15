@@ -16,9 +16,9 @@ RUN mkdir -p /usr/share/webapps ; \
 
 EXPOSE 5050
 
-COPY nginx.conf .
+COPY nginx.conf /etc/nginx/
 COPY setup_openssl .
-COPY wp-config.php .
+COPY wp-config.php /usr/share/webapps/wordpress/
 COPY init.sh .
 
 CMD ["./init.sh"]

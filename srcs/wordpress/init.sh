@@ -1,8 +1,5 @@
 #!/bin/sh
 
-mv nginx.conf /etc/nginx/nginx.conf
-mv wp-config.php /usr/share/webapps/wordpress/wp-config.php
-
 # nginx asks for this file in order to start
 mkdir /run/nginx
 touch /run/nginx/nginx.pid

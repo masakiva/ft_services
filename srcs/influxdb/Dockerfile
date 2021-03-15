@@ -6,6 +6,6 @@ RUN apk add influxdb=1.8.3-r2 telegraf=1.17.0-r0
 EXPOSE 8086
 
 COPY init.sh .
-COPY telegraf.conf .
+COPY telegraf.conf /etc/telegraf/
 
 CMD ["./init.sh"]

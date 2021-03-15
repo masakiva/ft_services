@@ -91,3 +91,14 @@ kubectl apply -f srcs/phpmyadmin.yaml
 
 docker build -t wordpress-image:1.0 srcs/wordpress
 kubectl apply -f srcs/wordpress.yaml
+
+docker build -t influxdb-image:1.0 srcs/influxdb
+kubectl apply -f srcs/influxdb.yaml
+
+docker build -t grafana-image:1.0 srcs/grafana
+kubectl apply -f srcs/grafana.yaml
+
+sed -i.backup "s/MINIKUBE_EXTERNAL_IP/$MINIKUBE_IP/g" srcs/ftps/vsftpd.conf
+docker build -t ftps-image:1.0 srcs/ftps
+kubectl apply -f srcs/ftps.yaml
+mv -f srcs/ftps/{vsftpd.conf.backup,vsftpd.conf}

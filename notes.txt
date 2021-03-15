@@ -1,11 +1,10 @@
-https://grafana.com/grafana/dashboards/1150
-https://grafana.com/grafana/dashboards?dataSource=influxdb&search=docker
-
 process principal en foreground dans les containers (avec exec script.sh?)
 + monitor secondary processes, php-fpm, telegraf...
 
-COPY directly in the right place
+nginx homepage /var/lib/nginx/html/index.html
+https://github.com/jgonf/Cursus/blob/master/ft_services/srcs/nginx/src/nginx.html
 
+corr grid to check
 
 
 

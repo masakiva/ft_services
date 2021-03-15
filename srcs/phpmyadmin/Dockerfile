@@ -8,9 +8,9 @@ RUN apk add phpmyadmin=5.0.4-r0
 
 EXPOSE 5000
 
-COPY nginx.conf .
+COPY nginx.conf /etc/nginx/
 COPY setup_openssl .
-COPY config.inc.php .
+COPY config.inc.php /etc/phpmyadmin/
 COPY init.sh .
 
 CMD ["./init.sh"]
