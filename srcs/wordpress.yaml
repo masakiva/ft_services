@@ -17,6 +17,14 @@ spec:
       - name: wordpress-container
         image: wordpress-image:1.0
         imagePullPolicy: Never
+        livenessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - -c
+            - 'pgrep php-fpm && pgrep nginx'
+          initialDelaySeconds: 5
+          periodSeconds: 5
         ports:
         - containerPort: 5050
 ---

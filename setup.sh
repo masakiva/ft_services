@@ -80,7 +80,11 @@ sed -i.backup "s/MINIKUBE_EXTERNAL_IP/$MINIKUBE_IP/g" srcs/metallb-config.yaml
 kubectl apply -f srcs/metallb-config.yaml
 mv -f srcs/{metallb-config.yaml.backup,metallb-config.yaml}
 
+sed -i.backup "s/MINIKUBE_EXTERNAL_IP/$MINIKUBE_IP/g" srcs/nginx/index.html
+sed -i.backup "s/MINIKUBE_EXTERNAL_IP/$MINIKUBE_IP/g" srcs/nginx/nginx.conf
 docker build -t nginx-image:1.0 srcs/nginx
+mv -f srcs/nginx/{index.html.backup,index.html}
+mv -f srcs/nginx/{nginx.conf.backup,nginx.conf}
 kubectl apply -f srcs/nginx.yaml
 
 docker build -t mysql-image:1.0 srcs/mysql
@@ -100,5 +104,5 @@ kubectl apply -f srcs/grafana.yaml
 
 sed -i.backup "s/MINIKUBE_EXTERNAL_IP/$MINIKUBE_IP/g" srcs/ftps/vsftpd.conf
 docker build -t ftps-image:1.0 srcs/ftps
-kubectl apply -f srcs/ftps.yaml
 mv -f srcs/ftps/{vsftpd.conf.backup,vsftpd.conf}
+kubectl apply -f srcs/ftps.yaml

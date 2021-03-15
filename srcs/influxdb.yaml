@@ -46,11 +46,19 @@ spec:
       - name: influxdb-container
         image: influxdb-image:1.0
         imagePullPolicy: Never
+        livenessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - -c
+            - 'pgrep telegraf && pgrep influxd'
+          initialDelaySeconds: 5
+          periodSeconds: 5
         ports:
         - containerPort: 8086
         volumeMounts:
         - name: influxdb-persistent-storage
-          mountPath: /var/lib/influxdb
+          mountPath: /root/.influxdb
         - name: docker-socket-access
           mountPath: /var/run/docker.sock
       volumes:

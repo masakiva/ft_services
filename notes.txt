@@ -1,18 +1,3 @@
-process principal en foreground dans les containers (avec exec script.sh?)
-+ monitor secondary processes, php-fpm, telegraf...
-
-nginx homepage /var/lib/nginx/html/index.html
-https://github.com/jgonf/Cursus/blob/master/ft_services/srcs/nginx/src/nginx.html
-
-corr grid to check
-
-
-
-
 to add for corrections:
 minikube delete
 sudo usermod -aG docker $(whoami); newgrp docker
-
-video a 54:00 https://www.youtube.com/watch?v=X48VuDVv0do
-
-discord ft_services!

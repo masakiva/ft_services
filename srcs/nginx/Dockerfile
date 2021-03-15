@@ -9,6 +9,7 @@ EXPOSE 443
 
 COPY nginx.conf /etc/nginx/
 COPY setup_openssl .
+COPY index.html /var/lib/nginx/html/
 COPY init.sh .
 
 CMD ["./init.sh"]

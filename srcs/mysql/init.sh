@@ -8,8 +8,8 @@ then
 fi
 
 rc-status
+# openrc asks for this file
 touch /run/openrc/softlevel
 rc-service mariadb start
 
-#mariadbd-safe --datadir='/var/lib/mysql' &
 tail -f /dev/null

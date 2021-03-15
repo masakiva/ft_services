@@ -10,5 +10,4 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 adduser -h /home/./ftps -D ftps-user
 echo 'ftps-user:ftps-pass' | chpasswd
 
-vsftpd /etc/vsftpd/vsftpd.conf &
-tail -f /dev/null
+vsftpd /etc/vsftpd/vsftpd.conf
