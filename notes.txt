@@ -1,3 +1,0 @@
-to add for corrections:
-minikube delete
-sudo usermod -aG docker $(whoami); newgrp docker

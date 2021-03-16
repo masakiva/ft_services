@@ -23,7 +23,7 @@ spec:
             - /bin/sh
             - -c
             - 'pgrep php-fpm && pgrep nginx'
-          initialDelaySeconds: 5
+          initialDelaySeconds: 30
           periodSeconds: 5
         ports:
         - containerPort: 5000

@@ -52,7 +52,7 @@ spec:
             - /bin/sh
             - -c
             - 'pgrep /usr/bin/mariadbd'
-          initialDelaySeconds: 5
+          initialDelaySeconds: 30
           periodSeconds: 5
         ports:
         - containerPort: 3306

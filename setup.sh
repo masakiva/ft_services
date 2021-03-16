@@ -17,10 +17,20 @@ install_kubectl()
 	rm kubectl
 }
 
+### ALLOW NON ROOT USER TO RUN DOCKER
+if ! [[ `groups | grep docker ; echo $?` == '1' ]]
+then
+	echo "This user is not allowed to execute docker commands"
+	echo 'Giving you the rights...'
+	sudo usermod -aG docker $(whoami)
+	echo 'Please run "newgrp docker" then relaunch this script'
+	exit 1
+fi
+
 ### WAKE UP DOCKER DAEMON
 docker version > /dev/null
 
-### UPDATE MINIKUBE
+### UPDATE MINIKUBE, AND CLEAR PREVIOUS CLUSTER
 if ! command -v minikube &> /dev/null
 then
 	echo 'Minikube not found'
@@ -32,6 +42,8 @@ then
 	echo 'Updating Minikube...'
 	minikube delete
 	install_minikube
+else
+	minikube delete
 fi
 
 ### START MINIKUBE CLUSTER
@@ -75,8 +87,9 @@ eval $(minikube -p minikube docker-env)
 
 ### GET EXTERNAL IP GIVEN BY MINIKUBE
 MINIKUBE_IP=`kubectl get node -o=custom-columns='DATA:status.addresses[0].address' | sed -n 2p`
-sed -i.backup "s/MINIKUBE_EXTERNAL_IP/$MINIKUBE_IP/g" srcs/metallb-config.yaml
 
+### REPLACE VARIABLE BY THIS EXTERNAL IP USING SED
+sed -i.backup "s/MINIKUBE_EXTERNAL_IP/$MINIKUBE_IP/g" srcs/metallb-config.yaml
 kubectl apply -f srcs/metallb-config.yaml
 mv -f srcs/{metallb-config.yaml.backup,metallb-config.yaml}
 
