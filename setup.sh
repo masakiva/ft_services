@@ -18,7 +18,7 @@ install_kubectl()
 }
 
 ### ALLOW NON ROOT USER TO RUN DOCKER
-if ! [[ `groups | grep docker ; echo $?` == '1' ]]
+if [[ `groups | grep docker ; echo $?` == '1' ]]
 then
 	echo "This user is not allowed to execute docker commands"
 	echo 'Giving you the rights...'
@@ -42,8 +42,8 @@ then
 	echo 'Updating Minikube...'
 	minikube delete
 	install_minikube
-else
-	minikube delete
+#else
+	#minikube delete
 fi
 
 ### START MINIKUBE CLUSTER
